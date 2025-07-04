@@ -1,0 +1,639 @@
+        :root {
+            --shopee-primary: #ee4d2d;
+            --shopee-primary-light: #ff7354;
+            --shopee-background: #f5f5f5;
+            --shopee-surface: #ffffff;
+            --shopee-text-primary: #000000DE;
+            --shopee-text-secondary: #000000CC;
+            --shopee-text-link: #05a;
+            --shopee-border-color: #e0e0e0;
+            --shopee-price-color: var(--shopee-primary);
+            --shopee-overlay-bgd: rgba(0, 0, 0, 0.4);
+            --shopee-overlay-bgm: rgba(0, 0, 0, 0.9);
+
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+
+            --radius-sm: 3px;
+            --radius-md: 4px;
+            --radius-lg: 8px;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, 'Helvetica Neue', sans-serif;
+            margin: 0;
+            background-color: var(--shopee-background);
+            color: var(--shopee-text-primary);
+            font-size: 14px;
+        }
+        body.lightbox-open {
+            overflow: hidden;
+        }
+
+        .shopee-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0; /* Padding dihilangkan untuk mobile-first (full-screen) */
+        }
+        
+        /* --- Header & Breadcrumb --- */
+        .desktop-only {
+            display: none;
+        }
+        .shopee-main-header {
+            background: linear-gradient(-180deg, #f53d2d, #f63);
+            padding: var(--spacing-md) 0;
+            color: white;
+        }
+        .header-container {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+        }
+        .header-logo a {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+        .header-logo-img {
+            height: 50px;
+            width: auto;
+        }
+        .header-search {
+            flex-grow: 1;
+            display: flex;
+            min-width: 0;
+        }
+        .search-bar {
+            background-color: white;
+            color: var(--shopee-text-secondary);
+            padding: 10px 12px;
+            border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .search-button {
+            background-color: var(--shopee-primary);
+            border: 3px solid var(--shopee-surface);
+            color: white;
+            padding: 0 16px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            cursor: pointer;
+        }
+        .search-button .ti {
+            font-size: 20px;
+        }
+        .header-socials {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        .header-socials span {
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .header-socials a {
+            color: white;
+            text-decoration: none;
+            font-size: 22px;
+        }
+        .shopee-breadcrumb {
+            padding: var(--spacing-md) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size:13px;
+        }
+        .shopee-breadcrumb a {
+            color: var(--shopee-text-link);
+            text-decoration: none;
+        }
+        .shopee-breadcrumb a:hover {
+            text-decoration: none;
+        }
+        .shopee-breadcrumb span {
+            color: var(--shopee-text-primary);
+        }
+        .shopee-breadcrumb .separator {
+            font-size: 16px;
+            color: var(--shopee-border-color);
+        }
+        .shopee-breadcrumb .current {
+            color: var(--shopee-text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* --- AKHIR PERUBAHAN --- */
+
+        .shopee-product-main {
+            background-color: var(--shopee-surface);
+            padding: 0; /* Padding dihilangkan untuk mobile */
+            display: flex;
+            flex-direction: column;
+            gap: 0; /* Gap dihilangkan untuk mobile agar lebih rapat */
+            border-radius: 0; /* Radius dihilangkan untuk mobile */
+        }
+
+        .shopee-gallery {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .shopee-main-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+        }
+
+        .shopee-main-image {
+            height: 100%;
+            display: flex;
+            transition: transform 0.3s ease;
+        }
+
+        .shopee-main-image .shopee-main-image-item {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .shopee-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .shopee-image-counter {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            z-index: 10;
+        }
+
+        .shopee-thumbnail-track-wrapper {
+            margin-top: var(--spacing-sm);
+            position: relative;
+            padding: 0; 
+            display: none; 
+        }
+
+        .shopee-thumbnail-track-container {
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            cursor: grab; 
+            scroll-behavior: smooth; /* Ditambahkan untuk efek geser */
+        }
+        .shopee-thumbnail-track-container.active {
+             cursor: grabbing;
+        }
+
+        .shopee-thumbnail-track-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .shopee-thumbnail-track {
+            display: flex;
+            gap: var(--spacing-sm);
+            padding-bottom: 4px;
+        }
+        
+        .shopee-thumbnail-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.2); 
+            color: white;
+            border: none;
+            width: 20px;
+            height: 40px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            border-radius: var(--radius-sm);
+            transition: background-color 0.2s;
+        }
+        .shopee-thumbnail-arrow.prev { left: 0px; }
+        .shopee-thumbnail-arrow.next { right: 0px; }
+        .shopee-thumbnail-arrow.hidden { display: none; }
+
+        .shopee-thumbnail {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--shopee-border-color);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .shopee-thumbnail.active {
+            border-color: var(--shopee-primary);
+        }
+
+        .shopee-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        @media (min-width: 768px) {
+            .desktop-only {
+                display: block;
+            }
+            .shopee-container {
+                padding: 0 var(--spacing-md); /* Padding dikembalikan untuk desktop */
+            }
+            .shopee-product-main {
+                flex-direction: row;
+                padding: var(--spacing-md); /* Padding dikembalikan untuk desktop */
+                border-radius: var(--radius-md); /* Radius dikembalikan untuk desktop */
+                gap: var(--spacing-lg); /* Gap dikembalikan untuk desktop */
+            }
+            .shopee-image-counter {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .shopee-thumbnail-arrow {
+                display: none !important; 
+            }
+        }
+
+        /* --- STYLING LIGHTBOX (POPUP VIEWER) --- */
+        .shopee-lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--shopee-overlay-bgm);
+            z-index: 1000;
+            display: none;
+        }
+        .shopee-lightbox.show {
+            display: flex;
+        }
+        
+        .lightbox-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        .lightbox-top-control, .lightbox-bottom-control {
+            background-color: rgba(0,0,0,0.5);
+            padding: var(--spacing-sm) var(--spacing-md);
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .lightbox-top-control {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lightbox-counter { font-size: 16px; }
+        .lightbox-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: var(--spacing-sm);
+        }
+
+        .lightbox-main-view {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .lightbox-image-slider {
+            display: flex;
+            height: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+        .lightbox-image-slider .lightbox-image-item {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-image-slider img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            box-sizing: border-box;
+        }
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translate3d(0, -40px, 0);
+            background-color: rgba(0,0,0,0.54);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 80px;
+            font-size: 35px;
+            cursor: pointer;
+            z-index: 1010;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+        }
+        .lightbox-arrow.prev { left: 0px; }
+        .lightbox-arrow.next { right: 0px; }
+
+        .lightbox-bottom-control {
+            overflow-x: auto;
+            padding-bottom: var(--spacing-md);
+        }
+        .lightbox-thumbnail-track {
+            display: flex;
+            gap: var(--spacing-sm);
+            width: max-content;
+            margin: 0 auto;
+        }
+        .lightbox-thumbnail {
+            width: 60px;
+            height: 60px;
+            border: 2px solid transparent;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .lightbox-thumbnail.active {
+            border-color: var(--shopee-primary);
+        }
+        .lightbox-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .lightbox-desktop-details {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .shopee-lightbox {
+                background-color: var(--shopee-overlay-bgd);
+                align-items: center;
+                justify-content: center;
+                padding: var(--spacing-lg);
+            }
+            .lightbox-content-wrapper {
+                flex-direction: row;
+                width: auto;
+                max-width: 95vw;
+                height: auto;
+                max-height: 90vh;
+                background-color: var(--shopee-surface);
+                border-radius: var(--radius-sm);
+                position: relative;
+                padding: var(--spacing-sm);
+            }
+            .lightbox-top-control, .lightbox-bottom-control {
+                display: none;
+            }
+            .lightbox-main-view {
+                width: 500px;
+                height: 500px;
+            }
+            .lightbox-desktop-details {
+                display: flex;
+                flex-direction: column;
+                padding-left: var(--spacing-md);
+                width: 308px;
+                height: 500px;
+            }
+            .lightbox-product-name {
+                font-size: 18px;
+                font-weight: 400;
+                margin: var(--spacing-sm) 0 var(--spacing-md) 0;
+                color: var(--shopee-text-primary);
+                line-height: 1.125rem;
+                max-height: 2.8em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+            #lightbox-thumbnail-gallery-desktop {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--spacing-sm);
+                overflow-y: auto;
+                flex: 1;
+                padding-right: 4px;
+                align-content: start;
+            }
+            #lightbox-thumbnail-gallery-desktop .lightbox-thumbnail {
+                width: auto;
+                height: 90px;
+            }
+            .lightbox-close-btn {
+                display: none;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .lightbox-arrow {
+                display: none !important; 
+            }
+        }
+
+        /* --- AKHIR STYLING LIGHTBOX --- */
+
+        .shopee-details {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            padding: var(--spacing-md); /* Menambahkan padding untuk konten di mobile */
+        }
+        .shopee-product-title {
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 1.4;
+            margin: 0 0 var(--spacing-md) 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .shopee-product-price-section {
+            background-color: #fafafa;
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            border-radius: var(--radius-sm);
+        }
+        .shopee-product-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--shopee-price-color);
+        }
+        .shopee-variants-section,
+        .shopee-action-section {
+            padding: 0; /* Padding dihilangkan untuk mobile */
+            margin-bottom: var(--spacing-lg);
+        }
+        .shopee-section-label {
+            color: var(--shopee-text-secondary);
+            width: 100px;
+            flex-shrink: 0;
+            font-size: 14px;
+            text-transform: capitalize;
+        }
+        .shopee-variants-row {
+            display: flex;
+            align-items: flex-start; /* Ubah agar label sejajar dengan baris pertama tombol */
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        .shopee-variant-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+        .shopee-variant-btn {
+            background-color: var(--shopee-surface);
+            border: 1px solid var(--shopee-border-color);
+            color: var(--shopee-text-primary);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 14px;
+            min-width: 60px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+        .shopee-variant-btn:disabled {
+            background-color: #fafafa;
+            color: #cccccc;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+        .shopee-variant-btn.selected {
+            border-color: var(--shopee-primary);
+            color: var(--shopee-primary);
+            position: relative;
+        }
+        .shopee-variant-btn.selected::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-bottom: 14px solid var(--shopee-primary);
+            border-left: 14px solid transparent;
+        }
+        .shopee-variant-btn.selected::after {
+            content: '✓';
+            position: absolute;
+            bottom: -2px;
+            right: 1px;
+            color: white;
+            font-size: 9px;
+            font-weight: bold;
+        }
+        .shopee-action-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        .shopee-buy-button {
+            background-color: rgba(255, 87, 34, 0.1);
+            border: 1px solid var(--shopee-primary);
+            color: var(--shopee-primary);
+            padding: 12px var(--spacing-md);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            flex-grow: 1;
+        }
+        .shopee-buy-button:hover {
+            background-color: rgba(255, 87, 34, 0.2);
+        }
+        .shopee-buy-button.primary {
+            background-color: var(--shopee-primary);
+            color: white;
+        }
+        .shopee-buy-button.primary:hover {
+            background-color: var(--shopee-primary-light);
+        }
+        .shopee-buy-button.is-inactive {
+            opacity: 0.7;
+        }
+        
+        .shopee-variant-warning {
+            display: none;
+            background-color: #fff5f5;
+            color: var(--shopee-primary);
+            padding: 10px;
+            margin-top: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-size: 13px;
+        }
+        .shopee-product-description-section {
+            background-color: var(--shopee-surface);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-md);
+            border-radius: var(--radius-md);
+        }
+        .shopee-description-title {
+            font-size: 18px;
+            padding: var(--spacing-md);
+            background-color: rgba(0,0,0,0.02);
+            margin: -24px -24px 16px -24px;
+            border-bottom: 1px solid var(--shopee-border-color);
+        }
+        .shopee-description-content {
+            line-height: 1.7;
+            color: var(--shopee-text-secondary);
+            font-size: 15px;
+        }
+        .shopee-description-content * {
+            max-width: 100%;
+            font-size: inherit !important;
+            color: inherit !important;
+        }
+        .shopee-description-content p {
+            margin: 0 0 1em 0;
+        }
