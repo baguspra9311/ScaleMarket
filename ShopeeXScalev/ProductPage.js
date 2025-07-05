@@ -23,20 +23,16 @@
             return;
         }
 
-        // --- PENAMBAHAN: Set Favicon Dinamis (Jurus Pamungkas v2) ---
+        // --- PENAMBAHAN: Set Favicon Dinamis (Jurus Pamungkas v3 - Penjaga Abadi) ---
         if (scalevData.store && scalevData.store.logo) {
             const faviconUrl = `https://cdn.scalev.id/${scalevData.store.logo}`;
 
             const forceFavicon = () => {
-                // Hapus favicon lain jika ada dan href-nya tidak cocok
-                document.querySelectorAll("link[rel~='icon']").forEach(link => {
-                    if (link.href !== faviconUrl) {
-                        link.remove();
-                    }
-                });
-
-                // Cek apakah favicon kita sudah ada, jika belum, tambahkan
-                if (!document.querySelector(`link[rel~='icon'][href='${faviconUrl}']`)) {
+                let link = document.querySelector("link[rel~='icon']");
+                if (!link || link.href !== faviconUrl) {
+                    // Hapus semua favicon yang salah
+                    document.querySelectorAll("link[rel~='icon'], link[rel~='shortcut icon']").forEach(l => l.remove());
+                    // Buat dan pasang favicon kita
                     const newLink = document.createElement('link');
                     newLink.rel = 'icon';
                     newLink.href = faviconUrl;
@@ -44,22 +40,15 @@
                 }
             };
 
-            // Patroli agresif selama 4 detik
-            let patrolChecks = 0;
-            const patrolInterval = setInterval(() => {
+            // Fungsi penjaga yang akan berjalan dalam loop
+            const guardian = () => {
                 forceFavicon();
-                patrolChecks++;
-                if (patrolChecks >= 16) { // 16 * 250ms = 4 detik
-                    clearInterval(patrolInterval);
-                }
-            }, 250);
+                // Minta browser untuk menjalankan guardian lagi di frame berikutnya
+                requestAnimationFrame(guardian);
+            };
 
-            // Jaga pintu jangka panjang dengan CCTV
-            const observer = new MutationObserver(forceFavicon);
-            observer.observe(document.head, {
-                childList: true,
-                subtree: true
-            });
+            // Mulai penjagaan abadi
+            guardian();
         }
         
         const optionNamesMap = isBundle ? {} : {
