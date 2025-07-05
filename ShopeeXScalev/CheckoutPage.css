@@ -1,3 +1,6 @@
 .max-w-\[510px\].md\:max-w-\[688px\].min-h-\[500px\].flex.w-full.flex-col.bg-\[var\(--page-bg\)\] {
     max-width: unset;
 }
+button {
+    border: 5px solid black;
+}
